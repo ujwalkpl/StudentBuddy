@@ -3,7 +3,7 @@ import time
 import configparser
 import time
 from selenium.webdriver.common.keys import Keys
-import globals
+
 import pickle
 from selenium.common.exceptions import NoSuchElementException
 path="C:\\Users\\Ujwal\\Downloads\\chromedriver_win32\\chromedriver.exe"
@@ -12,8 +12,8 @@ driver=webdriver.Chrome(path)
 
 driver.get('https://web.whatsapp.com/')
 
-globals.LAST_MESSAGES = 10000
-globals.extracted  = []
+LAST_MESSAGES = 10000
+extracted  = []
 top_messages = []
 
 
@@ -28,12 +28,8 @@ def chats():
     messages = driver.find_elements_by_xpath(m_arg)  
     top_messages = messages[-1*globals.LAST_MESSAGES:]
     message_dic[name] = [m.text for m in top_messages]
-    globals.extracted = message_dic[name]
+    extracted = message_dic[name]
     print(message_dic[name])
-
-
-
-
 
 
 name = "ISE 6C🤟"
@@ -55,5 +51,5 @@ chats()
 
 
 with open("test1.txt", "wb") as fp:
-    pickle.dump(globals.extracted, fp)
+    pickle.dump(extracted, fp)
 
