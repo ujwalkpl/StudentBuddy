@@ -69,13 +69,28 @@ user = driver.find_element_by_xpath('//span[@title = "{}"]'.format(name))
 # driver.find_element_by_xpath("//div[@class='_10V4p _1jxtm']/div").send_keys(Keys.CONTROL + Keys.HOME)
 
 user.click()
-
+ho = driver.find_element_by_xpath("//div[@class='_1_q7u']")
+ho.click()
 driver.find_element_by_tag_name('body').send_keys(Keys.CONTROL + Keys.HOME)
-# time.sleep(3)
+time.sleep(4)
 driver.find_element_by_tag_name('body').send_keys(Keys.CONTROL + Keys.HOME)
-# time.sleep(3)
+time.sleep(4)
 driver.find_element_by_tag_name('body').send_keys(Keys.CONTROL + Keys.HOME)
-# time.sleep(3)
+time.sleep(4)
+driver.find_element_by_tag_name('body').send_keys(Keys.CONTROL + Keys.HOME)
+time.sleep(4)
+driver.find_element_by_tag_name('body').send_keys(Keys.CONTROL + Keys.HOME)
+time.sleep(4)
+driver.find_element_by_tag_name('body').send_keys(Keys.CONTROL + Keys.HOME)
+time.sleep(4)
+driver.find_element_by_tag_name('body').send_keys(Keys.CONTROL + Keys.HOME)
+time.sleep(4)
+driver.find_element_by_tag_name('body').send_keys(Keys.CONTROL + Keys.HOME)
+time.sleep(4)
+driver.find_element_by_tag_name('body').send_keys(Keys.CONTROL + Keys.HOME)
+time.sleep(4)
+driver.find_element_by_tag_name('body').send_keys(Keys.CONTROL + Keys.HOME)
+time.sleep(4)
 
 def chats():
     
@@ -88,7 +103,7 @@ def chats():
 
     # image = driver.find_element_by_xpath("//*[@id="main"]/header/div[1]/div/img")
     # message_dic[name].append(image.get_attribute('src'))
-    print(*message_dic[name], sep = "\n\n")
+    print(message_dic[name])
 # msg_box = driver.find_element_by_class_name('_13mgZ')
 
 
