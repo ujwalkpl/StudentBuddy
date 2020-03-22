@@ -1,8 +1,8 @@
 from selenium import webdriver
-
+import time
 import configparser
 import time
-
+from selenium.webdriver.common.keys import Keys
 
 from selenium.common.exceptions import NoSuchElementException
 path="C:\\Users\\Ujwal\\Downloads\\chromedriver_win32\\chromedriver.exe"
@@ -11,7 +11,7 @@ driver=webdriver.Chrome(path)
 
 driver.get('https://web.whatsapp.com/')
 
-LAST_MESSAGES = 10
+LAST_MESSAGES = 100
 WAIT_FOR_CHAT_TO_LOAD = 2 # in secs
 
 message_dic = {}
@@ -56,26 +56,30 @@ def read_last_in_message(driver):
 
 
 
-name = input("Enter name")
-msg = input('Enter message')
-count = int(input('Enter the count'))
+name = "ISE 6C🤟"
+# msg = input('Enter message')
+# count = int(input('Enter the count'))
 input('Enter anything after scanning QR code')
-
-
-
-
-
 
 
 
 
 user = driver.find_element_by_xpath('//span[@title = "{}"]'.format(name))
 
-
+# driver.find_element_by_xpath("//div[@class='_10V4p _1jxtm']/div").send_keys(Keys.CONTROL + Keys.HOME)
 
 user.click()
 
+driver.find_element_by_tag_name('body').send_keys(Keys.CONTROL + Keys.HOME)
+# time.sleep(3)
+driver.find_element_by_tag_name('body').send_keys(Keys.CONTROL + Keys.HOME)
+# time.sleep(3)
+driver.find_element_by_tag_name('body').send_keys(Keys.CONTROL + Keys.HOME)
+# time.sleep(3)
+
 def chats():
+    
+    
     name = driver.find_element_by_xpath("//div[@class='_19vo_']/span").text
     m_arg = '//div[@class="_1ays2"]/div'
     messages = driver.find_elements_by_xpath(m_arg)  
@@ -91,11 +95,11 @@ def chats():
 chats()
 # subject = [('Java','J2EE'),('OOADP','Object Oriented Design Pattersn'),('System Software','SS'),('Machine Learning','ML')]
 # test = ['test','internals','lab test']
-# for messages in message_dic[name]:
+# # for messages in message_dic[name]:
 
-for i in range(count):
-    msg_box.send_keys(msg)
-    driver.find_element_by_class_name('_3M-N-').click()
+# for i in range(count):
+#     msg_box.send_keys(msg)
+#     driver.find_element_by_class_name('_3M-N-').click()
 
 
 
