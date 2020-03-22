@@ -35,12 +35,6 @@ def chats():
 
 
 
-def process():
-    for messages in globals.extracted:
-        a = messages.split('\n')
-        if len(a) >= 3:
-            print("name = " + a[0] + "\nmessage = "+ a[-2]+"\ntime = "+ a[-1]+"\n\n\n")
-
 
 name = "ISE 6C🤟"
 input('Enter anything after scanning QR code')
@@ -58,14 +52,8 @@ for i in range(100):
     driver.find_element_by_tag_name('body').send_keys(Keys.CONTROL + Keys.HOME)
     time.sleep(4)            
 chats()
-process()
+
 
 with open("test1.txt", "wb") as fp:
     pickle.dump(globals.extracted, fp)
-
-with open("test1.txt", "rb") as fp:
-    b = pickle.load(fp)
-
-
-print(b)
 
