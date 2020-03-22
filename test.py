@@ -3,7 +3,7 @@ import time
 import configparser
 import time
 from selenium.webdriver.common.keys import Keys
-
+import globals
 from selenium.common.exceptions import NoSuchElementException
 path="C:\\Users\\Ujwal\\Downloads\\chromedriver_win32\\chromedriver.exe"
 driver=webdriver.Chrome(path)
@@ -11,110 +11,53 @@ driver=webdriver.Chrome(path)
 
 driver.get('https://web.whatsapp.com/')
 
-LAST_MESSAGES = 100
-WAIT_FOR_CHAT_TO_LOAD = 2 # in secs
+globals.LAST_MESSAGES = 10000
+globals.extracted  = []
+top_messages = []
+
 
 message_dic = {}
-def read_last_in_message(driver):
-    """
-    Reading the last message that you got in from the chatter
-    """
-    for messages in driver.find_elements_by_xpath(
-            "//div[contains(@class,'message-in')]"):
-        try:
-            message = ""
-            emojis = []
-
-            message_container = messages.find_element_by_xpath(
-                ".//div[@class='copyable-text']")
-
-            message = message_container.find_element_by_xpath(
-                ".//span[contains(@class,'selectable-text invisible-space copyable-text')]"
-            ).text
-
-            for emoji in message_container.find_elements_by_xpath(
-                    ".//img[contains(@class,'selectable-text invisible-space copyable-text')]"
-            ):
-                emojis.append(emoji.get_attribute("data-plain-text"))
-
-        except NoSuchElementException:  # In case there are only emojis in the message
-            try:
-                message = ""
-                emojis = []
-                message_container = messages.find_element_by_xpath(
-                    ".//div[@class='copyable-text']")
-
-                for emoji in message_container.find_elements_by_xpath(
-                        ".//img[contains(@class,'selectable-text invisible-space copyable-text')]"
-                ):
-                    emojis.append(emoji.get_attribute("data-plain-text"))
-            except NoSuchElementException:
-                pass
-
-    return message, emojis
 
 
+
+
+def chats():
+    name = driver.find_element_by_xpath("//div[@class='_19vo_']/span").text
+    m_arg = '//div[@class="_1ays2"]/div'
+    messages = driver.find_elements_by_xpath(m_arg)  
+    top_messages = messages[-1*globals.LAST_MESSAGES:]
+    message_dic[name] = [m.text for m in top_messages]
+    globals.extracted = message_dic
+    print(message_dic[name])
+
+
+
+
+def process():
+    
+    for messages in globals.extracted:
+        a = messages.split('\n')
+        if len(a) >= 3:
+            print("name = " + a[0] + "\nmessage = "+ a[-2]+"\ntime = "+ a[-1]+"\n\n\n")
 
 
 name = "ISE 6C🤟"
-# msg = input('Enter message')
-# count = int(input('Enter the count'))
 input('Enter anything after scanning QR code')
 
 
 
 
 user = driver.find_element_by_xpath('//span[@title = "{}"]'.format(name))
-
-# driver.find_element_by_xpath("//div[@class='_10V4p _1jxtm']/div").send_keys(Keys.CONTROL + Keys.HOME)
-
 user.click()
+
 ho = driver.find_element_by_xpath("//div[@class='_1_q7u']")
 ho.click()
-driver.find_element_by_tag_name('body').send_keys(Keys.CONTROL + Keys.HOME)
-time.sleep(4)
-driver.find_element_by_tag_name('body').send_keys(Keys.CONTROL + Keys.HOME)
-time.sleep(4)
-driver.find_element_by_tag_name('body').send_keys(Keys.CONTROL + Keys.HOME)
-time.sleep(4)
-driver.find_element_by_tag_name('body').send_keys(Keys.CONTROL + Keys.HOME)
-time.sleep(4)
-driver.find_element_by_tag_name('body').send_keys(Keys.CONTROL + Keys.HOME)
-time.sleep(4)
-driver.find_element_by_tag_name('body').send_keys(Keys.CONTROL + Keys.HOME)
-time.sleep(4)
-driver.find_element_by_tag_name('body').send_keys(Keys.CONTROL + Keys.HOME)
-time.sleep(4)
-driver.find_element_by_tag_name('body').send_keys(Keys.CONTROL + Keys.HOME)
-time.sleep(4)
-driver.find_element_by_tag_name('body').send_keys(Keys.CONTROL + Keys.HOME)
-time.sleep(4)
-driver.find_element_by_tag_name('body').send_keys(Keys.CONTROL + Keys.HOME)
-time.sleep(4)
 
-def chats():
-    
-    
-    name = driver.find_element_by_xpath("//div[@class='_19vo_']/span").text
-    m_arg = '//div[@class="_1ays2"]/div'
-    messages = driver.find_elements_by_xpath(m_arg)  
-    top_messages = messages[-1*LAST_MESSAGES:]
-    message_dic[name] = [m.text for m in top_messages]
-
-    # image = driver.find_element_by_xpath("//*[@id="main"]/header/div[1]/div/img")
-    # message_dic[name].append(image.get_attribute('src'))
-    print(message_dic[name])
-# msg_box = driver.find_element_by_class_name('_13mgZ')
-
-
+for i in range(100):
+    driver.find_element_by_tag_name('body').send_keys(Keys.CONTROL + Keys.HOME)
+    time.sleep(4)            
 chats()
-# subject = [('Java','J2EE'),('OOADP','Object Oriented Design Pattersn'),('System Software','SS'),('Machine Learning','ML')]
-# test = ['test','internals','lab test']
-# # for messages in message_dic[name]:
-
-# for i in range(count):
-#     msg_box.send_keys(msg)
-#     driver.find_element_by_class_name('_3M-N-').click()
+process()
 
 
 
