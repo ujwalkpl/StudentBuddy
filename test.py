@@ -3,9 +3,9 @@ import time
 import configparser
 import time
 from selenium.webdriver.common.keys import Keys
-
+import re
 from selenium.common.exceptions import NoSuchElementException
-path="C:\\Users\\Ujwal\\Downloads\\chromedriver_win32\\chromedriver.exe"
+path="C:\\Users\\HOME\\Downloads\\chromedriver_win32\\chromedriver.exe"
 driver=webdriver.Chrome(path)
 
 
@@ -56,7 +56,7 @@ def read_last_in_message(driver):
 
 
 
-name = "ISE 6C🤟"
+name = "Java and OOADP"
 # msg = input('Enter message')
 # count = int(input('Enter the count'))
 input('Enter anything after scanning QR code')
@@ -71,26 +71,10 @@ user = driver.find_element_by_xpath('//span[@title = "{}"]'.format(name))
 user.click()
 ho = driver.find_element_by_xpath("//div[@class='_1_q7u']")
 ho.click()
-driver.find_element_by_tag_name('body').send_keys(Keys.CONTROL + Keys.HOME)
-time.sleep(4)
-driver.find_element_by_tag_name('body').send_keys(Keys.CONTROL + Keys.HOME)
-time.sleep(4)
-driver.find_element_by_tag_name('body').send_keys(Keys.CONTROL + Keys.HOME)
-time.sleep(4)
-driver.find_element_by_tag_name('body').send_keys(Keys.CONTROL + Keys.HOME)
-time.sleep(4)
-driver.find_element_by_tag_name('body').send_keys(Keys.CONTROL + Keys.HOME)
-time.sleep(4)
-driver.find_element_by_tag_name('body').send_keys(Keys.CONTROL + Keys.HOME)
-time.sleep(4)
-driver.find_element_by_tag_name('body').send_keys(Keys.CONTROL + Keys.HOME)
-time.sleep(4)
-driver.find_element_by_tag_name('body').send_keys(Keys.CONTROL + Keys.HOME)
-time.sleep(4)
-driver.find_element_by_tag_name('body').send_keys(Keys.CONTROL + Keys.HOME)
-time.sleep(4)
-driver.find_element_by_tag_name('body').send_keys(Keys.CONTROL + Keys.HOME)
-time.sleep(4)
+
+for i in range(0,2):
+    driver.find_element_by_tag_name('body').send_keys(Keys.CONTROL + Keys.HOME)
+    time.sleep(4)
 
 def chats():
     
@@ -104,7 +88,17 @@ def chats():
     # image = driver.find_element_by_xpath("//*[@id="main"]/header/div[1]/div/img")
     # message_dic[name].append(image.get_attribute('src'))
     print(message_dic[name])
-# msg_box = driver.find_element_by_class_name('_13mgZ')
+    for i in message_dic[name]:
+        event = r'(test|lab|fee|payment)'
+        day = r'(Mon|Tue|Wed|Thu|Fri|Sat|Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec|next.*week|next.*month)'
+        time = r'([0-9]:[0-9]+|[0-9]+.[0-9]+).*(am|pm)'
+        eventr = re.findall(event,i)
+        dayr = re.findall(day,i)
+        timer = re.findall(time,i)
+        print('Event:', eventr)
+        print('Day',dayr)
+        print('Time',timer)
+    # msg_box = driver.find_element_by_class_name('_13mgZ')
 
 
 chats()
