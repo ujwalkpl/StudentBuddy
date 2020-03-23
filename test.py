@@ -5,6 +5,8 @@ import time
 from selenium.webdriver.common.keys import Keys
 import re
 from selenium.common.exceptions import NoSuchElementException
+from dateparser.search import search_dates
+
 path="C:\\Users\\HOME\\Downloads\\chromedriver_win32\\chromedriver.exe"
 driver=webdriver.Chrome(path)
 
@@ -87,17 +89,15 @@ def chats():
 
     # image = driver.find_element_by_xpath("//*[@id="main"]/header/div[1]/div/img")
     # message_dic[name].append(image.get_attribute('src'))
-    print(message_dic[name])
-    for i in message_dic[name]:
-        event = r'(test|lab|fee|payment)'
-        day = r'(Mon|Tue|Wed|Thu|Fri|Sat|Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec|next.*week|next.*month)'
-        time = r'([0-9]:[0-9]+|[0-9]+.[0-9]+).*(am|pm)'
-        eventr = re.findall(event,i)
-        dayr = re.findall(day,i)
-        timer = re.findall(time,i)
-        print('Event:', eventr)
-        print('Day',dayr)
-        print('Time',timer)
+    #print(message_dic[name])
+    for s in message_dic[name]:
+        event = re.findall(r'(test|lab|fee|payment)',s)
+        dates = search_dates(s)
+        if len(event):
+            print(event)
+            print(dates[0][0])
+            print()
+            print()
     # msg_box = driver.find_element_by_class_name('_13mgZ')
 
 
