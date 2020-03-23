@@ -74,7 +74,7 @@ user.click()
 ho = driver.find_element_by_xpath("//div[@class='_1_q7u']")
 ho.click()
 
-for i in range(0,2):
+for i in range(0,10):
     driver.find_element_by_tag_name('body').send_keys(Keys.CONTROL + Keys.HOME)
     time.sleep(4)
 
@@ -92,11 +92,12 @@ def chats():
     #print(message_dic[name])
     for s in message_dic[name]:
         event = re.findall(r'(test|lab|fee|payment)',s)
+        sub = re.findall(r'SS|Java|OOADP',s)
         dates = search_dates(s)
-        if len(event):
+        if len(event) and len(sub):
             print(event)
+            print(sub)
             print(dates[0][0])
-            print()
             print()
     # msg_box = driver.find_element_by_class_name('_13mgZ')
 
