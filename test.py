@@ -74,7 +74,7 @@ user.click()
 ho = driver.find_element_by_xpath("//div[@class='_1_q7u']")
 ho.click()
 
-for i in range(0,5):
+for i in range(0,50):
     driver.find_element_by_tag_name('body').send_keys(Keys.CONTROL + Keys.HOME)
     time.sleep(4)
 
