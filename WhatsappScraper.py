@@ -3,20 +3,16 @@ import time
 import configparser
 import time
 from selenium.webdriver.common.keys import Keys
-
 import pickle
 from selenium.common.exceptions import NoSuchElementException
 path="C:\\Users\\Ujwal\\Downloads\\chromedriver_win32\\chromedriver.exe"
 driver=webdriver.Chrome(path)
-
 
 driver.get('https://web.whatsapp.com/')
 
 LAST_MESSAGES = 10000
 extracted  = []
 top_messages = []
-
-
 message_dic = {}
 
 
@@ -34,8 +30,6 @@ def chats():
 
 name = "ISE 6C🤟"
 input('Enter anything after scanning QR code')
-
-
 
 
 user = driver.find_element_by_xpath('//span[@title = "{}"]'.format(name))
