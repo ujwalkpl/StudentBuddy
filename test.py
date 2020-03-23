@@ -74,9 +74,9 @@ user.click()
 ho = driver.find_element_by_xpath("//div[@class='_1_q7u']")
 ho.click()
 
-for i in range(0,50):
+for i in range(0,200):
     driver.find_element_by_tag_name('body').send_keys(Keys.CONTROL + Keys.HOME)
-    time.sleep(4)
+    time.sleep(2)
 
 def chats():
     
@@ -91,8 +91,8 @@ def chats():
     # message_dic[name].append(image.get_attribute('src'))
     #print(message_dic[name])
     for s in message_dic[name]:
-        event = re.findall(r'lab test|lab internal|fee payment|fees',s.lower())
-        sub = re.findall(r'SS|Java|OOADP|java|ss|ooadp|ml|payment',s.lower())
+        event = re.findall(r'lab test|lab internal|fee payment|fees|presentation|report',s.lower())
+        sub = re.findall(r'SS|Java|OOADP|java|ss|ooadp|ml|payment|component',s.lower())
         dates = search_dates(s.lower())
         if len(event) and len(sub) and dates is not None:
             print("Event:",event[0])
@@ -104,6 +104,7 @@ def chats():
                 if time != '' or day !='':
                     print("When:",f[0])
                     print()
+                    break
                 print()    
     # msg_box = driver.find_element_by_class_name('_13mgZ')
 
