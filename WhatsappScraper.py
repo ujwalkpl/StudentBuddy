@@ -42,8 +42,13 @@ for i in range(100):
     driver.find_element_by_tag_name('body').send_keys(Keys.CONTROL + Keys.HOME)
     time.sleep(4)            
 chats()
-
+chatbot = []
+for i in extracted:
+    i.replace('\n',' ')
+    chatbot.append(i)
 
 with open("test1.txt", "wb") as fp:
     pickle.dump(extracted, fp)
 
+with open("test2.txt", "wb") as fp:
+    pickle.dump(chatbot, fp)

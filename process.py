@@ -81,3 +81,11 @@ for i in b:
 
 
 # process()
+chatbot = []
+for i in b:
+    i.replace('\n',' ')
+    chatbot.append(i)
+
+
+with open("test2.txt", "wb") as fp:
+    pickle.dump(chatbot, fp)
