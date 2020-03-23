@@ -58,7 +58,7 @@ def read_last_in_message(driver):
 
 
 
-name = "ISE 6C"
+name = "ISE 6C🤟"
 # msg = input('Enter message')
 # count = int(input('Enter the count'))
 input('Enter anything after scanning QR code')
