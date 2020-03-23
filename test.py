@@ -92,7 +92,7 @@ def chats():
     #print(message_dic[name])
     for s in message_dic[name]:
         event = re.findall(r'(test|lab|fee|payment)',s)
-        sub = re.findall(r'SS|Java|OOADP',s)
+        sub = re.findall(r'SS|Java|OOADP|java|ss|ooadp|ml',s)
         dates = search_dates(s)
         if len(event) and len(sub):
             print(event)
@@ -110,6 +110,7 @@ chats()
 # for i in range(count):
 #     msg_box.send_keys(msg)
 #     driver.find_element_by_class_name('_3M-N-').click()
+
 
 
 
