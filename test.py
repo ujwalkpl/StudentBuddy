@@ -91,10 +91,10 @@ def chats():
     # message_dic[name].append(image.get_attribute('src'))
     #print(message_dic[name])
     for s in message_dic[name]:
-        event = re.findall(r'(test|lab|fee|payment)',s)
-        sub = re.findall(r'SS|Java|OOADP|java|ss|ooadp|ml',s)
+        event = re.findall(r'(lab test|lab internal|Fee payment|fee payment|fees|Fees)',s)
+        sub = re.findall(r'SS|Java|OOADP|java|ss|ooadp|ml|payment',s)
         dates = search_dates(s)
-        if len(event) and len(sub):
+        if len(event) and len(sub) and len(dates):
             print(event)
             print(sub)
             print(dates[0][0])
