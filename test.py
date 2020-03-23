@@ -13,7 +13,7 @@ driver=webdriver.Chrome(path)
 
 driver.get('https://web.whatsapp.com/')
 
-LAST_MESSAGES = 100
+LAST_MESSAGES = 10000
 WAIT_FOR_CHAT_TO_LOAD = 2 # in secs
 
 message_dic = {}
@@ -74,7 +74,7 @@ user.click()
 ho = driver.find_element_by_xpath("//div[@class='_1_q7u']")
 ho.click()
 
-for i in range(0,30):
+for i in range(0,5):
     driver.find_element_by_tag_name('body').send_keys(Keys.CONTROL + Keys.HOME)
     time.sleep(4)
 
@@ -82,11 +82,11 @@ def chats():
     
     
     name = driver.find_element_by_xpath("//div[@class='_19vo_']/span").text
-    m_arg = '//div[@class="_1ays2"]/div'
+    m_arg = '//span[@class="_F7Vk selectable-text invisible-space copyable-text"]/span'
     messages = driver.find_elements_by_xpath(m_arg)  
     top_messages = messages[-1*LAST_MESSAGES:]
     message_dic[name] = [m.text for m in top_messages]
-
+    print(message_dic[name])
     # image = driver.find_element_by_xpath("//*[@id="main"]/header/div[1]/div/img")
     # message_dic[name].append(image.get_attribute('src'))
     #print(message_dic[name])
@@ -94,7 +94,7 @@ def chats():
         event = re.findall(r'lab test|lab internal|fee payment|fees',s.lower())
         sub = re.findall(r'SS|Java|OOADP|java|ss|ooadp|ml|payment',s.lower())
         dates = search_dates(s.lower())
-        if len(event) and len(sub) and len(dates):
+        if len(event) and len(sub) and dates is not None:
             print("Event:",event[0])
             print("Subject",sub[0])
             #print("Dates:",dates)
