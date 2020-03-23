@@ -11,38 +11,29 @@ actual_message = []
 
 def process():
     for messages in b:
-        a = messages.split('\n')
+        
+        dummy = messages
+        a = dummy.split('\n')
+        # print(messages)
         if len(a) >= 3:
             # print("name = " + a[0] + "\nmessage = "+ a[-2]+"\ntime = "+ a[-1]+"\n\n\n")
-            actual_message.append(a[-2])
+            # print(a[-1])
+            
+            
+            actual_message.append(messages.replace(a[-1],' '))
+        else:
+            actual_message.append(messages.replace(a[-1],' '))
 
 process()
 
 
-# for i in actual_message:
-#         event = r'(test|lab|fee|payment)'
-#         day = r'(mon|tue|wed|thu|fri|sat|jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec|next.*week|next.*month)'
-#         time = r'([0-9]:[0-9]+|[0-9]+.[0-9]+).*(am|pm)'
-#         Subject = r'(\bss|\bsystem software|\bml|\bmachine learning|\bjava|\bjava)'
-#         eventr = re.findall(event,i.lower()) 
-#         dayr = re.findall(day,i.lower())
-#         timer = re.findall(time,i.lower())
-#         Subjectr = re.findall(Subject,i.lower())
-#         if len(eventr) and len(dayr) and len(Subjectr) :
-#             print('Subject :', Subjectr, end = ' ')
-#             print(' Event:', eventr)
-#             print('Day',dayr)
-#             print('Time',timer)
-            
-#             print(i)
-
-
-for i in b:
+for i in actual_message:
+        
         event = r'(test|lab|fee|payment)'
         day = r'(mon|tue|wed|thu|fri|sat|jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec|next.*week|next.*month)'
         time = r'([0-9]:[0-9]+|[0-9]+.[0-9]+).*(am|pm)'
         Subject = r'(\bss|\bsystem software|\bml|\bmachine learning|\bjava|\bjava)'
-        date = r'(\b[0-9]+.(th|rd|th|st))'
+        date = r'(\b[0-9]+(th|rd|th|st))'
         eventr = set(re.findall(event,i.lower())) 
         dayr = set(re.findall(day,i.lower()))
         timer = list(set(re.findall(time,i.lower())))
@@ -52,18 +43,20 @@ for i in b:
         Subjectstr = " ".join(Subjectr)
         eventstr = " ".join(eventr)
         daystr = " ".join(dayr)
-        if len(dater):
-            datestr = "".join(dater[0][0])
-        if len(timer):
-            timestr = " ".join(timer[0])
+      
+       
 
         if len(eventr) and len(dayr) and len(Subjectr) :
             # print(dater)
             print('Subject :' + Subjectstr +" "+ eventstr)
             
 
-            print('Day :', daystr + " " + datestr)
-            print('Time :',timestr)
+            print('Day :', daystr,end = " ") 
+            if len(dater):
+                print("".join(dater[0][0]))
+            if len(timer):
+            
+                print('Time :'," ".join(timer[0]))
             
             # print(i)
 
