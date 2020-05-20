@@ -1,19 +1,47 @@
 import pickle
+import mysql.connector
 from dateparser.search import search_dates
 import re
+
+import mysql.connector
+
+mydb = mysql.connector.connect(
+  host="localhost",
+  user="root",
+  passwd="root",
+  database="mydatabase"
+)
+
+print(mydb)
+
+mycursor = mydb.cursor()
+
+# mycursor.execute("CREATE DATABASE mydatabase")
+
+
+# mycursor.execute("CREATE TABLE customers (name VARCHAR(255), address VARCHAR(255))")
+
+
+print()
+print()
+print()
+print()
 with open("test1.txt", "rb") as fp:
     b = pickle.load(fp)
 
 
-# print(b)
+print(b)
 
 actual_message = []
+
+
 
 def process():
     for messages in b:
         
         dummy = messages
         a = dummy.split('\n')
+        print(a)
         # print(messages)
         if len(a) >= 3:
             # print("name = " + a[0] + "\nmessage = "+ a[-2]+"\ntime = "+ a[-1]+"\n\n\n")
@@ -25,8 +53,6 @@ def process():
             actual_message.append(messages.replace(a[-1],' '))
 
 process()
-
-
 for i in actual_message:
         
         event = r'(test|lab|fee|payment)'
@@ -74,6 +100,45 @@ for i in actual_message:
 
 
 # process()
+
+
+a=[]
+for i in b:
+    a.append(i.split('\n'))
+
+print(a)
+
+sql = "INSERT INTO customers (date,event,subject) VALUES (%s, %s, %s)"
+
+
+
+print(mycursor.rowcount, "record inserted.")
+
+val = []
+for s in a[0]:
+        event = re.findall(r'lab test|lab internal|fee payment|fees|presentation|report',s.lower())
+        sub = re.findall(r'SS|Java|OOADP|java|ss|ooadp|ml|payment|component',s.lower())
+        dates = search_dates(s.lower())
+        if len(event) and len(sub) and dates is not None:
+            print("Event:",event[0])
+            print("Subject",sub[0])
+            #print("Dates:",dates)
+            for f in dates:
+                time = re.findall(r'am|pm',f[0].lower())
+                day = re.findall(r'mon|tue|wed|thur|fri|sat|sun|jan|feb|mar|apr|may|jun|july|aug|sept|oct|nov|dec',f[0].lower())
+                if time != '' or day !='':
+                    print("When:",f[0])
+                    val.append((event[0],sub[0],f[0]))
+                    print()
+                    break
+                print()  
+                print("wtf")
+                
+print("hello")
+print(val)
+mycursor.executemany(sql, val)
+
+mydb.commit()   
 chatbot = []
 for i in b:
     i.replace('\n',' ')
